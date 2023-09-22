@@ -21,5 +21,10 @@ func main() {
 		c.String(http.StatusOK, "HELLO WORLD!")
 	})
 
+	router.POST("/result", func(c *gin.Context) {
+		slackID := c.PostForm("slackID")
+		c.HTML(http.StatusOK, "result.html", gin.H{"slackID": slackID})
+	})
+
 	router.Run(":8080")
 }
