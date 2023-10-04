@@ -1,11 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Fatalf("failed to load env : %v", err)
+	}
+
+	token := os.Getenv("SLACK_TOKEN")
+
+	fmt.Printf("This is Slack Token: %v \n", token)
+
 	router := gin.Default()
 
 	router.LoadHTMLGlob("./web/templates/*.html")
